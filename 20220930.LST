@@ -1,0 +1,53 @@
+  ADDR B1 B2 B3 B4 thrass11.tmp                                     PAGE       1
+
+                   RWM     EQU     $0000
+                   ROM     EQU     $C000
+                   ROM2    EQU     $D000
+                   RESET   EQU     $FFFE
+
+                                   ORG     RwM
+                   vector2 RMB     (bogus-vector1)
+                   var             RMB     1
+
+                                   ORG     ROM
+  C000 18 CE 00 00                 LDY     #vector2
+  C004 CE D0 00                    LDX     #vector1
+  C007 A6 00       loop            LDAA    0,X
+  C009 81 61                       CMPA    #'a
+  C00B 25 09                       BLO     sig
+  C00D 81 7A                       CMPA    #'z
+  C00F 22 05                       BHI     sig
+  C011 18 A7 00                    STAA    0,y
+  C014 18 08                       INY
+
+  C016 08          sig             INX
+  C017 A6 00                       LDAA    0,x
+  C019 81 00                       CMPA    #0
+  C01B 26 EA                       BNE     loop
+  C01D 18 A7 00                    STAA    0,y
+  C020 20 FE       FIN             BRA     FIN
+
+                                   ORG     ROM2
+  D000 61 73 63 69 vector1 DB      'a,'s,'c,'i,'i,0
+. D004 69 00
+                   bogus           RMB     1
+
+
+
+
+                           ORG     RESET
+  FFFE C0 00               DW      ROM
+
+  Symbol Table 
+
+  BOGUS              D006
+  RWM                0000
+  VAR                0006
+  RESET              FFFE
+  FIN                C020
+  ROM2               D000
+  SIG                C016
+  ROM                C000
+  VECTOR1            D000
+  VECTOR2            0000
+  LOOP               C007

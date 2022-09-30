@@ -1,0 +1,26 @@
+  ADDR B1 B2 B3 B4 thrass11.tmp                                     PAGE       1
+
+                   ROM     EQU     $0000
+                   RWM     EQU     $C000
+
+                           ORG     ROM
+                   uno     RMB     1
+                   dos     RMB     1
+
+
+                           ORG     RWM
+  C000 86 00               LDAA    #0
+  C002 4C                  INCA
+  C003 97 00               STAA    $00
+
+
+  C005 20 FE       FIN     BRA     FIN
+
+
+  Symbol Table 
+
+  RWM                C000
+  DOS                0001
+  FIN                C005
+  UNO                0000
+  ROM                0000

@@ -1,0 +1,20 @@
+  ADDR B1 B2 B3 B4 E:\backup\Mis Documentos\UNLaM\Arquitectura\     PAGE       1
+
+                   ROM     EQU     $0000
+                   RWM     EQU     $C000
+
+                           ORG     ROM
+
+
+                           ORG     RWM
+
+
+
+                   *vector de reset
+                           ORG     $FFFE
+  FFFE 00 00               DW      ROM
+
+  Symbol Table 
+
+  RWM                C000
+  ROM                0000
