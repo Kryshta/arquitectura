@@ -1,0 +1,75 @@
+RWM	EQU	$0000
+ROM	EQU	$C000
+RESET	EQU	$FFFE
+
+	ORG 	RwM
+INPUT	RMB	1
+	
+	ORG	ROM
+	CLR	$1040
+	LDAA	#33
+	STAA	$0000
+	BEQ	zero
+	LDAB	#32
+	CBA
+	BLS	uno
+	LDAB	#64
+	CBA
+	BLS	dos
+	LDAB	#96
+	CBA
+	BLS	tres
+	LDAB	#128
+	CBA
+	BLS	cuatro
+	LDAB	#160
+	CBA
+	BLS	cinco
+	LDAB	#192
+	CBA
+	BLS	seis
+	LDAB	#224
+	CBA
+	BLS	siete
+	BRA	ocho
+
+zero	
+	LDAB	#0
+	STAB	$1040
+	BRA 	FIN
+uno	
+	LDAB	#1
+	STAB	$1040
+	BRA 	FIN
+dos	
+	LDAB	#%11
+	STAB	$1040
+	BRA 	FIN
+tres	
+	LDAB	#%111
+	STAB	$1040
+	BRA 	FIN
+cuatro	
+	LDAB	#%1111
+	STAB	$1040
+	BRA 	FIN
+cinco	
+	LDAB	#%11111
+	STAB	$1040
+	BRA 	FIN
+seis	
+	LDAB	#%111111
+	STAB	$1040
+	BRA 	FIN
+siete	
+	LDAB	#%1111111
+	STAB	$1040
+	BRA 	FIN
+ocho	
+	LDAB	#%11111111
+	STAB	$1040
+
+FIN 	BRA	FIN
+
+	ORG	RESET
+	DW	ROM

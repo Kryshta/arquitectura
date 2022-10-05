@@ -1,20 +1,96 @@
-  ADDR B1 B2 B3 B4 E:\backup\Mis Documentos\UNLaM\Arquitectura\     PAGE       1
+  ADDR B1 B2 B3 B4 thrass11.tmp                                     PAGE       1
 
-                   ROM     EQU     $0000
-                   RWM     EQU     $C000
+                   RWM     EQU     $0000
+                   ROM     EQU     $C000
+                   RESET   EQU     $FFFE
+
+                           ORG     RwM
+                   INPUT   RMB     1
 
                            ORG     ROM
+  C000 7F 10 40            CLR     $1040
+  C003 86 21               LDAA    #33
+  C005 97 00               STAA    $0000
+  C007 27 25               BEQ     zero
+  C009 C6 20               LDAB    #32
+  C00B 11                  CBA
+  C00C 23 27               BLS     uno
+  C00E C6 40               LDAB    #64
+  C010 11                  CBA
+  C011 23 29               BLS     dos
+  C013 C6 60               LDAB    #96
+  C015 11                  CBA
+  C016 23 2B               BLS     tres
+  C018 C6 80               LDAB    #128
+  C01A 11                  CBA
+  C01B 23 2D               BLS     cuatro
+  C01D C6 A0               LDAB    #160
+  C01F 11                  CBA
+  C020 23 2F               BLS     cinco
+  C022 C6 C0               LDAB    #192
+  C024 11                  CBA
+  C025 23 31               BLS     seis
+  C027 C6 E0               LDAB    #224
+  C029 11                  CBA
+  C02A 23 33               BLS     siete
+  C02C 20 38               BRA     ocho
 
+                   zero
+  C02E C6 00               LDAB    #0
+  C030 F7 10 40            STAB    $1040
+  C033 20 36               BRA     FIN
+                   uno
+  C035 C6 01               LDAB    #1
+  C037 F7 10 40            STAB    $1040
+  C03A 20 2F               BRA     FIN
+                   dos
+  C03C C6 03               LDAB    #%11
+  C03E F7 10 40            STAB    $1040
+  C041 20 28               BRA     FIN
+                   tres
+  C043 C6 07               LDAB    #%111
+  C045 F7 10 40            STAB    $1040
+  C048 20 21               BRA     FIN
+                   cuatro
+  C04A C6 0F               LDAB    #%1111
+  C04C F7 10 40            STAB    $1040
+  C04F 20 1A               BRA     FIN
+                   cinco
+  C051 C6 1F               LDAB    #%11111
+  C053 F7 10 40            STAB    $1040
+  C056 20 13               BRA     FIN
+                   seis
+  C058 C6 3F               LDAB    #%111111
+  C05A F7 10 40            STAB    $1040
+  C05D 20 0C               BRA     FIN
+                   siete
+  C05F C6 7F               LDAB    #%1111111
+  ADDR B1 B2 B3 B4 thrass11.tmp                                     PAGE       2
 
-                           ORG     RWM
+  C061 F7 10 40            STAB    $1040
+  C064 20 05               BRA     FIN
+                   ocho
+  C066 C6 FF               LDAB    #%11111111
+  C068 F7 10 40            STAB    $1040
 
+  C06B 20 FE       FIN     BRA     FIN
 
-
-                   *vector de reset
-                           ORG     $FFFE
-  FFFE 00 00               DW      ROM
+                           ORG     RESET
+  FFFE C0 00               DW      ROM
 
   Symbol Table 
 
-  RWM                C000
-  ROM                0000
+  TRES               C043
+  SIETE              C05F
+  CINCO              C051
+  RWM                0000
+  DOS                C03C
+  RESET              FFFE
+  ZERO               C02E
+  OCHO               C066
+  FIN                C06B
+  SEIS               C058
+  CUATRO             C04A
+  UNO                C035
+  INPUT              0000
+  ROM                C000

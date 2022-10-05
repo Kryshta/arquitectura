@@ -1,0 +1,20 @@
+RWM	EQU	$0000
+ROM	EQU	$C000
+RESET	EQU	$FFFE
+
+	ORG 	RwM
+	
+	
+	ORG	ROM
+
+inicio	CLRA
+	LDAB	$F5
+Otro	ADDA	$F7
+	DECB
+	BNE	otro
+	STAA	$F8
+
+FIN 	BRA	FIN
+
+	ORG	RESET
+	DW	ROM
